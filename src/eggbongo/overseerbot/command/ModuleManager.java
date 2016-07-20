@@ -10,23 +10,36 @@ import java.util.ArrayList;
  */
 public class ModuleManager {
 
+    // list of available modules
     public static ArrayList<Module> modules = new ArrayList<>();
 
+    /**
+     * Constructor
+     */
     public ModuleManager() {
 
+        // initialize basic module
         Module basic = new Module("Basic","Basic starter commands.",true);
         basic.addCommand("ping",new PingCommand());
         basic.addCommand("help",new HelpCommand());
         modules.add(basic);
 
-        Module basicadmin = new Module("BasicAdmin","Starter administration commands. These commands require you to have the role 'Botwizard' for use.");
+        // initialize basicadmin module
+        Module basicadmin = new Module("BasicAdmin","Starter administration commands. These commands require you to have the role 'Botwizard' for use.",true);
         modules.add(basicadmin);
 
     }
 
+    /**
+     * Searches for a command in available modules.
+     * @param key The name of the command.
+     * @return The command.
+     */
     public static Command getCommand(String key) {
 
         for (int i = 0; i < modules.size(); i++) {
+
+            //TODO check for inactive modules
 
             Command c = modules.get(i).getCommand(key);
             if (c != null) return c;

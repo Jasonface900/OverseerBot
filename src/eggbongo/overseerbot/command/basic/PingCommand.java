@@ -9,6 +9,7 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 public class PingCommand implements Command {
 
 
+    // this sucker runs no matter what
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         return true;
@@ -16,7 +17,7 @@ public class PingCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage("PONG! Your bot is working properly.");
+        event.getTextChannel().sendMessage("PONG! Your bot is working properly."); // it literally just says pong
     }
 
     @Override

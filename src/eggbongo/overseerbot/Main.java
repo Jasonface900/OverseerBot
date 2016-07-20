@@ -6,11 +6,7 @@ import eggbongo.overseerbot.util.Constants;
 import net.dv8tion.jda.JDA;
 import net.dv8tion.jda.JDABuilder;
 import net.dv8tion.jda.entities.Guild;
-import net.dv8tion.jda.managers.AccountManager;
-import net.dv8tion.jda.utils.AvatarUtil;
 
-import javax.imageio.ImageIO;
-import java.io.File;
 import java.util.List;
 
 /**
@@ -19,35 +15,49 @@ import java.util.List;
  */
 public class Main {
 
+    // public variables
     public static JDA jda;
-
     public static CommandParser parser;
 
     public static void main(String[] args) {
 
         try {
 
+            // initialize JDA
             jda = new JDABuilder().addListener(new BotListener()).setBotToken(Constants.token).buildBlocking();
             jda.setAutoReconnect(true);
 
+            // cosmetic stuff
             jda.getAccountManager().setGame("overseer2.com");
 
-            /*List<Guild> guilds = jda.getGuilds();
+            // compile list of guilds the bot is in
+            List<Guild> guilds = jda.getGuilds();
             for (int i = 0; i < guilds.size(); i++) {
+
+                log("status","Logged into server '"+guilds.get(i).getName()+"'"); //log servers
+
+                // notify server that bot is online - with style ;3
                 guilds.get(i).getPublicChannel().sendMessage("SUP BITCHES. this is ROXY LALONDE aka the unofficial OVERSEERBOT. just warnin u i am here ALIVE N WELL ;3");
-            }*/
+
+            }
 
         } catch(Exception e) {
             e.printStackTrace();
         }
 
+        // initialize command parser
         parser = new CommandParser();
 
     }
 
+    // for command line log - currently two types of log
     public static void log(String msgType, String output) {
+
         String prefix = "";
-        switch (msgType) {
+
+        // TODO add timestamp to log
+
+        switch (msgType) { // add prefix if message is known type
             case "status":
                 prefix = "[Status] ";
                 break;
@@ -58,9 +68,10 @@ public class Main {
                 break;
         }
 
-        prefix += "[OverseerBot] ";
+        prefix += "[OverseerBot] "; // add bot name to log for the hell of it
 
-        System.out.println(prefix + output);
+        System.out.println(prefix + output); // spit out line into log
+
     }
 
 }

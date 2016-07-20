@@ -25,17 +25,16 @@ public class CommandParser {
      */
     public void handleCommand(CommandContainer command) {
 
-        Command c = moduleManager.getCommand(command.getInvoke());
+        Command c = ModuleManager.getCommand(command.getInvoke());
 
         if (c != null) {
 
-            boolean result = c.called(command.getArgs(),command.getE());
+            boolean result = c.called(command.getArgs(),command.getE()); // test to see if command can run
 
             if (result) {
                 c.action(command.getArgs(),command.getE());
+                Main.log("command","Ran command '"+command.getInvoke()+"' for user '"+command.getE().getAuthor().getUsername()+"' in channel '"+command.getE().getChannel()+"' with "+command.getArgs().length+" arguments.");
             }
-
-            Main.log("command","Ran command '"+command.getInvoke()+"' for user '"+command.getE().getAuthor().getUsername()+"' in channel '"+command.getE().getChannel()+"' with "+command.getArgs().length+" arguments.");
 
         } else {
             command.getE().getTextChannel().sendMessage("Sorry, "+command.getE().getAuthor().getAsMention()+", "+prefix+command.getInvoke()+" is not a command I know yet!");
@@ -51,6 +50,7 @@ public class CommandParser {
      */
     public CommandContainer parse(String raw, MessageReceivedEvent e) {
 
+        // split the raw into the first keyword and everything that comes after
         String[] split = raw.replaceFirst(prefix,"").split(" ");
         String invoke = split[0];
         String[] args = new String[split.length-1];

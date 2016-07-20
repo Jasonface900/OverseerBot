@@ -14,6 +14,7 @@ public class HelpCommand implements Command {
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
 
+        // check for incorrect number of arguments
         if (args.length > 1) {
             event.getChannel().sendMessage("I don't understand that number of arguments!");
             return false;
@@ -23,21 +24,30 @@ public class HelpCommand implements Command {
 
     }
 
+    // Brace urself, this function is long af
+
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
+        // if ~help or ~help verbose was called
         if (args.length == 0 || args[0].equals("verbose")) {
 
+            // Opening lines of ~help
             String message = "Use "+CommandParser.prefix+"help [module/command name] for more detailed help.\n**ACTIVE MODULES:**";
 
+            // Go through all modules and display enabled ones
             for (int i = 0; i < ModuleManager.modules.size(); i++) {
 
                 Module m = ModuleManager.modules.get(i);
+
+                // only display if the module is enabled
                 if (m.enabled) {
+                    //add row with name and description
                     message += "\n"+
                             m.getName()+"\n"+
                             "*"+m.getDescription()+"*";
 
+                    // if 'verbose' is used then add a list of commands below too
                     if (args.length > 0) {
 
                         for (String c : m.commands.keySet()) {
@@ -50,26 +60,33 @@ public class HelpCommand implements Command {
 
             }
 
+            // sEND THAT GIANTASS MESSAGE
             event.getChannel().sendMessage(message);
 
         }
 
         else {
 
+            // loop through the modules to look for the command/module
             for (int i = 0; i < ModuleManager.modules.size(); i++) {
 
                 Module m = ModuleManager.modules.get(i);
+
+                // if the module name matches
                 if (m.getName().toLowerCase().equals(args[0].toLowerCase())) {
 
+                    // add a row for the module
                     String message = "**"+m.getName()+"**\n"+
                             "Active: *"+m.enabled+"*\n"+
                             m.getDescription() + "\n" +
                             "*Commands:*";
 
+                    // list its commands
                     for (String command : m.commands.keySet()) {
                         message += "\n"+CommandParser.prefix+command;
                     }
 
+                    // send that fuckin message
                     event.getChannel().sendMessage(message);
 
                     return;
@@ -78,15 +95,18 @@ public class HelpCommand implements Command {
 
             }
 
+            // if its not ~help verbose or ~help [module name], its gotta be a command. look for it.
             Command command = ModuleManager.getCommand(args[0]);
             if (command != null) {
 
+                // if u found the command describe it
                 String message = "**"+CommandParser.prefix+args[0]+"**\n"+
                         command.help();
 
                 event.getChannel().sendMessage(message);
 
             } else {
+                // otherwise ¯\_(ツ)_/¯
                 event.getChannel().sendMessage("Could not find module or command '"+args[0]+"'. Sorry ;-;");
             }
 

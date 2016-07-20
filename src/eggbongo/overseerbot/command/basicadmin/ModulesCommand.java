@@ -8,6 +8,9 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
  */
 public class ModulesCommand implements Command {
 
+    //ENTIRE CLASS IS TODO
+    //will eventually display a list of all available modules. Ignore for now.
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         return false;
