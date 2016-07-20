@@ -20,8 +20,8 @@ public class ModuleManager {
 
         // initialize basic module
         Module basic = new Module("Basic","Basic starter commands.",true);
-        basic.addCommand("ping",new PingCommand());
-        basic.addCommand("help",new HelpCommand());
+        basic.addCommand(new PingCommand());
+        basic.addCommand(new HelpCommand());
         modules.add(basic);
 
         // initialize basicadmin module

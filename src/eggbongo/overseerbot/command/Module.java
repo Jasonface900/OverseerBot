@@ -1,16 +1,13 @@
 package eggbongo.overseerbot.command;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by alex on 7/19/16.
  */
 public class Module {
 
-    //TODO completely redo commands - make the command name be self-contained
-
-    // Hashmap of commands contained within module
-    public HashMap<String, Command> commands = new HashMap<>();
+    public ArrayList<Command> commands = new ArrayList<>();
 
     // details of the module
     private String name;
@@ -43,11 +40,10 @@ public class Module {
 
     /**
      * Add a command to the module.
-     * @param key The name of the command.
      * @param command The command.
      */
-    public void addCommand(String key, Command command) {
-        commands.put(key, command);
+    public void addCommand(Command command) {
+        commands.add(command);
     }
 
     /**
@@ -56,8 +52,13 @@ public class Module {
      * @return The command, if it exists in the module; otherwise null.
      */
     public Command getCommand(String key) {
-        if (!commands.containsKey(key)) return null;
-        return commands.get(key);
+
+        for (int i = 0; i < commands.size(); i++) {
+            if (commands.get(i).getKey().equals(key)) return commands.get(i);
+        }
+
+        return null;
+
     }
 
     // Below here there be GETTERS AND SETTERS. ._.

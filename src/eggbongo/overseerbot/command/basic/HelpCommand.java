@@ -9,7 +9,11 @@ import net.dv8tion.jda.events.message.MessageReceivedEvent;
 /**
  * Created by alex on 7/19/16.
  */
-public class HelpCommand implements Command {
+public class HelpCommand extends Command {
+
+    public HelpCommand() {
+        super("help");
+    }
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -33,7 +37,7 @@ public class HelpCommand implements Command {
         if (args.length == 0 || args[0].equals("verbose")) {
 
             // Opening lines of ~help
-            String message = "Use "+CommandParser.prefix+"help [module/command name] for more detailed help.\n**ACTIVE MODULES:**";
+            String message = "Use "+CommandParser.prefix+getKey()+" [module/command name] for more detailed help.\n**ACTIVE MODULES:**";
 
             // Go through all modules and display enabled ones
             for (int i = 0; i < ModuleManager.modules.size(); i++) {
@@ -50,8 +54,8 @@ public class HelpCommand implements Command {
                     // if 'verbose' is used then add a list of commands below too
                     if (args.length > 0) {
 
-                        for (String c : m.commands.keySet()) {
-                            message += "\n"+CommandParser.prefix+c;
+                        for (Command c : m.commands) {
+                            message += "\n"+CommandParser.prefix+c.getKey();
                         }
 
                     }
@@ -82,8 +86,8 @@ public class HelpCommand implements Command {
                             "*Commands:*";
 
                     // list its commands
-                    for (String command : m.commands.keySet()) {
-                        message += "\n"+CommandParser.prefix+command;
+                    for (Command command : m.commands) {
+                        message += "\n"+CommandParser.prefix+command.getKey();
                     }
 
                     // send that fuckin message
@@ -116,7 +120,7 @@ public class HelpCommand implements Command {
 
     @Override
     public String help() {
-        return "Use this command with a command or module name to learn more about it! `"+ CommandParser.prefix+"help verbose` will give you a very long post describing every module with a list of commands. Tread lightly :3";
+        return "Use this command with a command or module name to learn more about it! `"+ CommandParser.prefix+getKey()+" verbose` will give you a very long post describing every module with a list of commands. Tread lightly :3";
     }
 
 }
