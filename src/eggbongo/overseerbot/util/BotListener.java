@@ -22,7 +22,7 @@ public class BotListener extends ListenerAdapter {
 
             Main.parser.handleCommand(Main.parser.parse(event.getMessage().getContent().toLowerCase(),event));
 
-        }else{
+        }else if(event.getMessage().getAuthor().getId() != event.getJDA().getSelfInfo().getId()){
             messagesReceived++;
         }
 

@@ -10,7 +10,7 @@ import static eggbongo.overseerbot.util.BotListener.messagesReceived;
  */
 public class ToggleCommand extends Command {
 
-    private static boolean toggled;
+    private static boolean isToggled = false;
     private static Random RNGsus = new Random();
 
     public ToggleCommand() {
@@ -24,15 +24,18 @@ public class ToggleCommand extends Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event){
-        if(toggled){
+        if(isToggled){
             event.getTextChannel().sendMessage("CrockerOS Beta OFF.");
-            toggled = false;
+            isToggled = false;
         }else{
             event.getTextChannel().sendMessage("CrockerOS Beta ON.");
-            toggled = true;
+            isToggled = true;
         }
-        while(toggled && (messagesReceived % 5 <= 1)){
+        while(isToggled && (messagesReceived >= 5)){
             TextRandomizer(event);
+            if(messagesReceived >= 5){
+                messagesReceived = 0;
+            }
         }
         //// TODO: 7/20/2016 make it not break...
     }
