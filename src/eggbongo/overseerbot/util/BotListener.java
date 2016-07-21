@@ -5,14 +5,15 @@ import eggbongo.overseerbot.command.CommandParser;
 import net.dv8tion.jda.events.ReadyEvent;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
-import static eggbongo.overseerbot.command.crockeros.ToggleCommand.*;
+
+import static eggbongo.overseerbot.command.crockeros.ToggleCommand.isToggled;
 
 /**
  * Created by alex on 7/19/16.
  */
 public class BotListener extends ListenerAdapter {
 
-    public static int messagesReceived;
+    public static int messagesReceived = 0;
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
