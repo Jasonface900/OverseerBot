@@ -11,6 +11,8 @@ import net.dv8tion.jda.hooks.ListenerAdapter;
  */
 public class BotListener extends ListenerAdapter {
 
+    public static int messagesReceived;
+
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
 
@@ -20,6 +22,8 @@ public class BotListener extends ListenerAdapter {
 
             Main.parser.handleCommand(Main.parser.parse(event.getMessage().getContent().toLowerCase(),event));
 
+        }else{
+            messagesReceived++;
         }
 
     }

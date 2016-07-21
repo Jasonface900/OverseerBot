@@ -2,6 +2,7 @@ package eggbongo.overseerbot.command;
 
 import eggbongo.overseerbot.command.basic.HelpCommand;
 import eggbongo.overseerbot.command.basic.PingCommand;
+import eggbongo.overseerbot.command.crockeros.ToggleCommand;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,11 @@ public class ModuleManager {
         // initialize basicadmin module
         Module basicadmin = new Module("BasicAdmin","Starter administration commands. These commands require you to have the role 'Botwizard' for use.",true);
         modules.add(basicadmin);
+
+        // initialize crockeros module
+        Module crockeros = new Module("CrockerOS","The defacto version of Betty Crocker's Operating System.", true);
+        crockeros.addCommand(new ToggleCommand());
+        modules.add(crockeros);
 
     }
 
