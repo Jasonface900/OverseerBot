@@ -5,6 +5,7 @@ import eggbongo.overseerbot.command.CommandParser;
 import net.dv8tion.jda.events.ReadyEvent;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.hooks.ListenerAdapter;
+import static eggbongo.overseerbot.command.crockeros.ToggleCommand.*;
 
 /**
  * Created by alex on 7/19/16.
@@ -25,7 +26,12 @@ public class BotListener extends ListenerAdapter {
         }else if(event.getMessage().getAuthor().getId() != event.getJDA().getSelfInfo().getId()){
             messagesReceived++;
         }
-
+        while(isToggled && (messagesReceived >= 5)){
+            eggbongo.overseerbot.command.crockeros.ToggleCommand.TextRandomizer(event);
+            if(messagesReceived >= 5){
+                messagesReceived = 0;
+            }
+        }
     }
 
     @Override
