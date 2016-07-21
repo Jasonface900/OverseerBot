@@ -37,7 +37,7 @@ public class Main {
                 log("status","Logged into server '"+guilds.get(i).getName()+"'"); //log servers
 
                 // notify server that bot is online - with style ;3
-                guilds.get(i).getPublicChannel().sendMessage("Hi i'm Jane Crocker. I'm a bot! Hoo hoo hoo!");
+                guilds.get(i).getPublicChannel().sendMessage("waddup bitches its ROXY LALONDE aka the unofficial OVERSEERBOT. coming to you ALIVE AND WELL ;3");
 
             }
 
