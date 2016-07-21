@@ -10,6 +10,7 @@ public class CommandParser {
 
     public ModuleManager moduleManager;
 
+    // TODO make this configurable
     public static final String prefix = "~";
 
     /**
