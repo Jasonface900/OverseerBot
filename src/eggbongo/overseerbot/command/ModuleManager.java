@@ -2,7 +2,10 @@ package eggbongo.overseerbot.command;
 
 import eggbongo.overseerbot.command.basic.HelpCommand;
 import eggbongo.overseerbot.command.basic.PingCommand;
+import eggbongo.overseerbot.command.crockeros.CommandList;
 import eggbongo.overseerbot.command.crockeros.ToggleCommand;
+import eggbongo.overseerbot.command.reply.GoodbyeCommand;
+import eggbongo.overseerbot.command.reply.HelloCommand;
 
 import java.util.ArrayList;
 
@@ -31,8 +34,16 @@ public class ModuleManager {
 
         // initialize crockeros module
         Module crockeros = new Module("CrockerOS","The defacto version of Betty Crocker's Operating System.", true);
+        crockeros.addCommand(new CommandList());
         crockeros.addCommand(new ToggleCommand());
         modules.add(crockeros);
+
+        // intitialize hello module
+        Module reply = new Module("Reply","Replies to things?", true);
+        reply.addCommand(new HelloCommand());
+        reply.addCommand(new GoodbyeCommand());
+        modules.add(reply);
+
 
     }
 

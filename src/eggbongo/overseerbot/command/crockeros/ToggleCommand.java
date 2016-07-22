@@ -3,7 +3,6 @@ package eggbongo.overseerbot.command.crockeros;
 import eggbongo.overseerbot.command.Command;
 import net.dv8tion.jda.events.message.MessageReceivedEvent;
 import java.util.Random;
-import static eggbongo.overseerbot.util.BotListener.messagesReceived;
 
 /**
  * Created by Jorge on 7/20/2016.

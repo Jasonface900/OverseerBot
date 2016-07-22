@@ -6,6 +6,6 @@ package eggbongo.overseerbot.util;
 public class Constants {
 
     // im not sharing my bot token. make one urself and put ur token here
-    public static final String token = "token here";
+    public static final String token = "placeholder";
 
 }
