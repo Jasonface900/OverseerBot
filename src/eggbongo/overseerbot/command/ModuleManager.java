@@ -1,5 +1,6 @@
 package eggbongo.overseerbot.command;
 
+import eggbongo.overseerbot.command.admin.AdminPrefix;
 import eggbongo.overseerbot.command.basic.HelpCommand;
 import eggbongo.overseerbot.command.basic.PingCommand;
 import eggbongo.overseerbot.command.crockeros.CommandList;
@@ -43,6 +44,11 @@ public class ModuleManager {
         reply.addCommand(new HelloCommand());
         reply.addCommand(new GoodbyeCommand());
         modules.add(reply);
+
+        // initialize admin module
+        Module admin = new Module("Admin","Have access to admin commands.", true);
+        admin.addCommand(new AdminPrefix());
+        modules.add(admin);
 
 
     }
